@@ -44,20 +44,24 @@ export const GameScore = () => {
   return (
     <div>
       {/* first team score */}
-      <TeamScore
-        score={firstTeamScore}
-        onDecreaseScore={onDecreaseFirstTeamScore}
-        onIncreaseScore={onIncreaseFirstTeamScore}
-        teamName="1"
-      />
+      <div className="my-[30px]">
+        <TeamScore
+          score={firstTeamScore}
+          onDecreaseScore={onDecreaseFirstTeamScore}
+          onIncreaseScore={onIncreaseFirstTeamScore}
+          teamName="1"
+        />
+      </div>
 
       {/* second team score */}
-      <TeamScore
-        score={secondTeamScore}
-        onDecreaseScore={onDecreaseSecondTeamScore}
-        onIncreaseScore={onIncreaseSecondTeamScore}
-        teamName="2"
-      />
+      <div className="">
+        <TeamScore
+          score={secondTeamScore}
+          onDecreaseScore={onDecreaseSecondTeamScore}
+          onIncreaseScore={onIncreaseSecondTeamScore}
+          teamName="2"
+        />
+      </div>
 
       <div className="flex justify-center mt-[50px]">
         <IonButton size="large" onClick={onResetScore}>

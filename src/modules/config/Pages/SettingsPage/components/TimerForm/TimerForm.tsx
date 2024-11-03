@@ -1,17 +1,27 @@
 import React from "react";
+import dayjs from "dayjs";
+
 import { VerticalCounter } from "../VerticalCounter";
+import { useTimerStore } from "../../../../../home/store";
 
 export const TimerForm = () => {
+  const { defaultTimer, increaseSeconds, increaseMinutes, increaseHours } =
+    useTimerStore((state) => state);
+
+  const seconds = dayjs.duration(defaultTimer, "seconds").seconds();
+  const minutes = dayjs.duration(defaultTimer, "seconds").minutes();
+  const hours = dayjs.duration(defaultTimer, "seconds").hours();
+
   return (
     <div className="flex justify-center">
-      {/* seconds */}
-      <VerticalCounter onChange={(value) => console.log(value)} />
+      {/* hours */}
+      <VerticalCounter value={hours} onChange={increaseHours} />
 
       {/* minutes */}
-      <VerticalCounter onChange={(value) => console.log(value)} />
+      <VerticalCounter value={minutes} onChange={increaseMinutes} />
 
-      {/* hours */}
-      <VerticalCounter onChange={(value) => console.log(value)} />
+      {/* seconds */}
+      <VerticalCounter value={seconds} onChange={increaseSeconds} />
     </div>
   );
 };

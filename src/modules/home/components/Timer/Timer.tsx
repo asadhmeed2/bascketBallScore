@@ -44,7 +44,7 @@ export const Timer = (props: Props) => {
   useEffect(() => {
     setTimer(defaultTimer);
     return () => clearInterval(intervalIdRef.current);
-  }, []);
+  }, [defaultTimer]);
 
   function convertSeconds(seconds: number) {
     const duration = dayjs.duration(seconds, "seconds");
@@ -58,7 +58,9 @@ export const Timer = (props: Props) => {
   return (
     <div>
       {/* Timer display */}
-      <div className="font-bold text-center py-2">{convertSeconds(timer)}</div>
+      <div className="font-bold text-center py-2 text-3xl">
+        {convertSeconds(timer)}
+      </div>
 
       {/* Timer controls */}
 

@@ -35,11 +35,17 @@ export const TeamScore = (props: Props) => {
           </div>
         </div>
 
+        <div className="flex justify-center flex-wrap px-4">
+          <IonButton className="flex-1" onClick={() => onIncreaseScore(3)}>
+            +3
+          </IonButton>
+
+          <IonButton className="flex-1" onClick={() => onIncreaseScore(2)}>
+            +2
+          </IonButton>
+        </div>
+
         <div className="flex justify-center">
-          <IonButton onClick={() => onIncreaseScore(3)}>+3</IonButton>
-
-          <IonButton onClick={() => onIncreaseScore(2)}>+2</IonButton>
-
           {/* remove last added score */}
           <IonButton
             color={"danger"}
