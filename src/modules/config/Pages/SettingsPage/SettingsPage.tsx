@@ -5,26 +5,27 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import React from "react";
+import { TimerForm } from "./components";
 
-import "./Tab2.css";
-
-const Tab2: React.FC = () => {
+export const SettingsPage = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+          <IonTitle>Settings</IonTitle>
         </IonToolbar>
       </IonHeader>
+
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">Settings</IonTitle>
           </IonToolbar>
         </IonHeader>
+
+        <TimerForm />
       </IonContent>
     </IonPage>
   );
 };
-
-export default Tab2;

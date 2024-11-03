@@ -10,8 +10,8 @@ type TimerState = {
 
 export const useTimerStore = create<TimerState>()(
   devtools((set) => ({
-    timer: 6000, //seconds
-    defaultTimer: 6000,
+    timer: 600, //seconds
+    defaultTimer: 360,
     setTimer: (timer) => set((state) => ({ timer: timer })),
     decreaseTimer: () => set((state) => ({ timer: state.timer - 1 })),
   }))

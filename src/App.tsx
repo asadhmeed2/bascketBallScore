@@ -10,11 +10,12 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { ellipse, square, triangle } from "ionicons/icons";
+
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
 
 import { HomePage } from "./modules/home";
-import Tab2 from "./pages/Tab2";
-import Tab3 from "./pages/Tab3";
+import { SettingsPage } from "./modules/config/Pages";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -47,8 +48,6 @@ import "@ionic/react/css/palettes/dark.system.css";
 import "./theme/variables.css";
 import "./theme/index.css";
 
-import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 // import duration from 'dayjs/plugin/duration' // ES 2015
 
 dayjs.extend(duration);
@@ -63,12 +62,12 @@ const App: React.FC = () => (
           <Route exact path="/home">
             <HomePage />
           </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
+          <Route exact path="/settings">
+            <SettingsPage />
           </Route>
-          <Route path="/tab3">
+          {/* <Route path="/tab3">
             <Tab3 />
-          </Route>
+          </Route> */}
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
@@ -77,14 +76,13 @@ const App: React.FC = () => (
           <IonTabButton tab="tab1" href="/home">
             <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon aria-hidden="true" icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+          <IonTabButton tab="tab2" href="/settings">
+            <IonLabel>Settings</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
+          {/* <IonTabButton tab="tab3" href="/tab3">
             <IonIcon aria-hidden="true" icon={square} />
             <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
+          </IonTabButton> */}
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>

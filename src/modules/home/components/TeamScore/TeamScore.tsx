@@ -22,10 +22,12 @@ export const TeamScore = (props: Props) => {
     setLastAddedScore(0);
   }, [lastAddedScore]);
 
+  const disableResetBtn = lastAddedScore === 0 || props.score === 0;
+
   return (
     <>
       <div className="">
-        <div className="flex items-center">
+        <div className="flex items-center justify-center">
           <div>Team {props.teamName}</div>
           <span>:</span>
           <div className="flex items-center justify-center mx-2">
@@ -42,7 +44,7 @@ export const TeamScore = (props: Props) => {
           <IonButton
             color={"danger"}
             onClick={onDecreaseScore}
-            disabled={lastAddedScore === 0}
+            disabled={disableResetBtn}
           >
             remove last score
           </IonButton>
