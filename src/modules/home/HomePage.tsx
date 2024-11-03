@@ -26,7 +26,7 @@ export const HomePage = () => {
         </IonHeader>
 
         <div className="text-center text-3xl">Timer</div>
-        <Timer defaultTime={10} />
+        <Timer />
 
         <hr className="my-4" />
 

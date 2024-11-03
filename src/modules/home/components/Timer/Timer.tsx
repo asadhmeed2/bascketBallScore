@@ -2,28 +2,27 @@ import { IonButton } from "@ionic/react";
 import React, { useCallback, useEffect, useRef } from "react";
 
 import dayjs from "dayjs";
+import { useTimerStore } from "../../store";
 
-type Props = {
-  defaultTime: number; //seconds
-};
+type Props = {};
 
 export const Timer = (props: Props) => {
-  const [timer, setTimer] = React.useState(0);
+  const { timer, setTimer, defaultTimer, decreaseTimer } = useTimerStore(
+    (state) => state
+  );
 
   const intervalIdRef = useRef<NodeJS.Timeout>();
 
   const startTimer = useCallback(() => {
-    setTimer((prev) => {
-      if (prev === 1) {
-        // stop timer
-        clearInterval(intervalIdRef.current);
+    if (timer === 1) {
+      // stop timer
+      clearInterval(intervalIdRef.current);
 
-        return props.defaultTime;
-      }
+      setTimer(defaultTimer);
+    }
 
-      return prev - 1;
-    });
-  }, [props.defaultTime]);
+    decreaseTimer();
+  }, [timer, setTimer, defaultTimer]);
 
   const onStartTimer = useCallback(() => {
     if (intervalIdRef.current) {
@@ -31,7 +30,7 @@ export const Timer = (props: Props) => {
     }
 
     intervalIdRef.current = setInterval(startTimer, 1000);
-  }, [timer]);
+  }, []);
 
   const onPauseTimer = useCallback(() => {
     clearInterval(intervalIdRef.current);
@@ -39,14 +38,13 @@ export const Timer = (props: Props) => {
 
   const onResetTimer = useCallback(() => {
     clearInterval(intervalIdRef.current);
-    setTimer(props.defaultTime);
-  }, []);
+    setTimer(defaultTimer);
+  }, [defaultTimer]);
 
   useEffect(() => {
-    setTimer(props.defaultTime);
-
+    setTimer(defaultTimer);
     return () => clearInterval(intervalIdRef.current);
-  }, [props.defaultTime]);
+  }, []);
 
   function convertSeconds(seconds: number) {
     const duration = dayjs.duration(seconds, "seconds");
