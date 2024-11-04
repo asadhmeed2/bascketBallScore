@@ -15,7 +15,8 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 
 import { HomePage } from "./modules/home";
-import { SettingsPage } from "./modules/config/Pages";
+import { SettingsPage } from "./modules/settings/Pages";
+import { TeamsListPage } from "./modules/teams/pages";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -65,9 +66,9 @@ const App: React.FC = () => (
           <Route exact path="/settings">
             <SettingsPage />
           </Route>
-          {/* <Route path="/tab3">
-            <Tab3 />
-          </Route> */}
+          <Route path="/teams-list">
+            <TeamsListPage />
+          </Route>
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
@@ -76,7 +77,12 @@ const App: React.FC = () => (
           <IonTabButton tab="tab1" href="/home">
             <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/settings">
+
+          <IonTabButton tab="tab2" href="/teams-list">
+            <IonLabel>Teams</IonLabel>
+          </IonTabButton>
+
+          <IonTabButton tab="tab3" href="/settings">
             <IonLabel>Settings</IonLabel>
           </IonTabButton>
           {/* <IonTabButton tab="tab3" href="/tab3">

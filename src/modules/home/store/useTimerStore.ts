@@ -1,5 +1,8 @@
 import { create } from "zustand";
+
 import { devtools } from "zustand/middleware";
+
+import { Team } from "../../shared/types";
 
 type TimerState = {
   timer: number;
