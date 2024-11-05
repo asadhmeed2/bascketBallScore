@@ -1,1 +1,1 @@
-export * from "./TeamsFormModal";
+export * from "./TeamForm";

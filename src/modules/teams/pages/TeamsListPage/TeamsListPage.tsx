@@ -7,7 +7,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { TeamsList } from "../../components/TeamsList";
-import { AddTeamButton } from "../../components/AddTeamButton";
+import { TeamsForm } from "../../components";
 
 export const TeamsListPage = () => {
   return (
@@ -27,7 +27,7 @@ export const TeamsListPage = () => {
 
         {/* add team to list */}
         <div className="">
-          <AddTeamButton />
+          <TeamsForm />
         </div>
 
         {/* teams list */}
