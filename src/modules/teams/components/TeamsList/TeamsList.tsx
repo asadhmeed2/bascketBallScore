@@ -1,8 +1,19 @@
 import React from "react";
+
 import { useTeamsStore } from "../../store";
 
-export const TeamsList = () => {
-  const teamsList = useTeamsStore((state) => state.teamsList);
+import { TeamListItem } from "../TeamListItem";
 
-  return <div>TeamsList</div>;
+export const TeamsList = () => {
+  const { teamsList } = useTeamsStore((state) => state);
+
+  return (
+    <div>
+      {teamsList.map((team) => (
+        <div className="mb-1">
+          <TeamListItem key={team.id} team={team} />
+        </div>
+      ))}
+    </div>
+  );
 };

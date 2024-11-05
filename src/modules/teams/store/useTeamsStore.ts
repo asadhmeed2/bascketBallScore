@@ -7,8 +7,8 @@ import { Team } from "../../shared/types";
 type TeamsListState = {
   teamsList: Team[];
   addTeam: (team: Team) => void;
-  removeTeam: (id: number) => void;
-  updateTeam: (id: number, team: Team) => void;
+  removeTeam: (id: string) => void;
+  updateTeam: (id: string, team: Team) => void;
 };
 
 export const useTeamsStore = create<TeamsListState>()(

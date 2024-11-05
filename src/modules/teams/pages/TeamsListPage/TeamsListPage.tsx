@@ -7,6 +7,7 @@ import {
 } from "@ionic/react";
 import React from "react";
 import { TeamsList } from "../../components/TeamsList";
+import { AddTeamButton } from "../../components/AddTeamButton";
 
 export const TeamsListPage = () => {
   return (
@@ -24,12 +25,13 @@ export const TeamsListPage = () => {
           </IonToolbar>
         </IonHeader>
 
+        {/* add team to list */}
+        <div className="">
+          <AddTeamButton />
+        </div>
+
         {/* teams list */}
         <TeamsList />
-
-        {/* add team to list */}
-
-        {/* teamFormModal */}
       </IonContent>
     </IonPage>
   );
