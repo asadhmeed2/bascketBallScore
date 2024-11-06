@@ -1,11 +1,6 @@
 import React, { useCallback } from "react";
-import {
-  IonButton,
-  IonContent,
-  IonInput,
-  IonModal,
-  IonToolbar,
-} from "@ionic/react";
+
+import { IonButton, IonCard, IonInput } from "@ionic/react";
 
 import { Controller, useForm } from "react-hook-form";
 
@@ -46,24 +41,26 @@ export const TeamsForm = (props: Props) => {
   }, []);
 
   return (
-    <form noValidate onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex justify-between">
-        <Controller
-          name="name"
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <IonInput
-              {...field}
-              {...register("name")}
-              placeholder="Team Name"
-            />
-          )}
-        />
+    <IonCard>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex justify-between pl-1">
+          <Controller
+            name="name"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <IonInput
+                {...field}
+                {...register("name")}
+                placeholder="Team Name"
+              />
+            )}
+          />
 
-        <IonButton type="submit">Add</IonButton>
-      </div>
-    </form>
+          <IonButton type="submit">Add</IonButton>
+        </div>
+      </form>
+    </IonCard>
   );
 };
 

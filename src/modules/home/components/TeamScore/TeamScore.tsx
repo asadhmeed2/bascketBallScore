@@ -1,37 +1,85 @@
-import { IonButton } from "@ionic/react";
 import React, { useCallback } from "react";
 
+import { IonButton, IonSelect, IonSelectOption } from "@ionic/react";
+
+import { useTeamsStore } from "../../../teams/store";
+import { useGameStore } from "../../store";
+import { Team } from "../../../shared/types";
+import { set } from "react-hook-form";
+
 type Props = {
-  score: number;
-  onIncreaseScore: (score: number) => void;
-  onDecreaseScore: (score: number) => void;
-  teamName: string;
+  teamNumber: string;
 };
 
 export const TeamScore = (props: Props) => {
   const [lastAddedScore, setLastAddedScore] = React.useState(0);
 
-  const onIncreaseScore = (score: number) => {
-    setLastAddedScore(score);
-    props.onIncreaseScore(score);
-  };
+  const [team, setTeam] = React.useState<Team>({
+    id: "",
+    name: "",
+    score: 0,
+  });
+
+  const { teamsList } = useTeamsStore((state) => state);
+
+  const { setTeam1, setTeam2, updateTeam } = useGameStore((state) => state);
+
+  const onChangeTeam = useCallback(
+    (id: string) => {
+      const team = teamsList.find((team) => team.id === id);
+
+      if (team) {
+        if (props.teamNumber === "1") {
+          setTeam1(team);
+        } else {
+          setTeam2(team);
+        }
+
+        setTeam(team);
+      }
+    },
+    [teamsList]
+  );
+
+  const onIncreaseScore = useCallback(
+    (score: number) => {
+      setLastAddedScore(score);
+
+      updateTeam({ ...team, score: team.score + score });
+
+      setTeam((prev) => ({ ...prev, score: prev.score + score }));
+    },
+    [updateTeam, team]
+  );
 
   const onDecreaseScore = useCallback(() => {
-    props.onDecreaseScore(lastAddedScore);
+    updateTeam({ ...team, score: team.score - lastAddedScore });
+
+    setTeam((prev) => ({ ...prev, score: prev.score - lastAddedScore }));
 
     setLastAddedScore(0);
-  }, [lastAddedScore]);
+  }, [lastAddedScore, updateTeam, team]);
 
-  const disableResetBtn = lastAddedScore === 0 || props.score === 0;
+  const disableResetBtn = lastAddedScore === 0 || team.score === 0;
 
   return (
     <>
       <div className="">
         <div className="flex items-center justify-center">
-          <div>Team {props.teamName}</div>
+          <IonSelect
+            className="w-1/2"
+            onIonChange={(e) => onChangeTeam(e.detail.value)}
+            placeholder={`Select Team ${props.teamNumber}`}
+          >
+            {teamsList.map((team) => (
+              <IonSelectOption key={team.id} value={team.id}>
+                {team.name}
+              </IonSelectOption>
+            ))}
+          </IonSelect>
           <span>:</span>
           <div className="flex items-center justify-center mx-2">
-            {props.score}
+            {team.score}
           </div>
         </div>
 

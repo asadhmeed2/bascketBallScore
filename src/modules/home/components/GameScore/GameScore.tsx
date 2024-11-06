@@ -1,66 +1,28 @@
 import React, { useCallback, useState } from "react";
-import { TeamScore } from "../TeamScore";
 import { IonButton } from "@ionic/react";
 
+import { useGameStore } from "../../store";
+
+import { TeamScore } from "../TeamScore";
+
 export const GameScore = () => {
-  const [firstTeamScore, setFirstTeamScore] = useState(0);
-  const [secondTeamScore, setSecondTeamScore] = useState(0);
-
-  const onIncreaseFirstTeamScore = useCallback((score: number) => {
-    setFirstTeamScore((prev) => prev + score);
-  }, []);
-
-  const onDecreaseFirstTeamScore = useCallback(
-    (score: number) => {
-      if (firstTeamScore === 0) {
-        return;
-      }
-
-      setFirstTeamScore((prev) => prev - score);
-    },
-    [firstTeamScore]
-  );
-
-  const onIncreaseSecondTeamScore = useCallback((score: number) => {
-    setSecondTeamScore((prev) => prev + score);
-  }, []);
-
-  const onDecreaseSecondTeamScore = useCallback(
-    (score: number) => {
-      if (firstTeamScore === 0) {
-        return;
-      }
-
-      setSecondTeamScore((prev) => prev - score);
-    },
-    [firstTeamScore]
-  );
+  const { team1, team2, updateTeam } = useGameStore((state) => state);
 
   const onResetScore = useCallback(() => {
-    setFirstTeamScore(0);
-    setSecondTeamScore(0);
-  }, []);
+    updateTeam({ ...team1, score: 0 });
+    updateTeam({ ...team2, score: 0 });
+  }, [team1, team2, updateTeam]);
 
   return (
     <div>
       {/* first team score */}
       <div className="my-[30px]">
-        <TeamScore
-          score={firstTeamScore}
-          onDecreaseScore={onDecreaseFirstTeamScore}
-          onIncreaseScore={onIncreaseFirstTeamScore}
-          teamName="1"
-        />
+        <TeamScore teamNumber="1" />
       </div>
 
       {/* second team score */}
       <div className="">
-        <TeamScore
-          score={secondTeamScore}
-          onDecreaseScore={onDecreaseSecondTeamScore}
-          onIncreaseScore={onIncreaseSecondTeamScore}
-          teamName="2"
-        />
+        <TeamScore teamNumber="2" />
       </div>
 
       <div className="flex justify-center mt-[50px]">
